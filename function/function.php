@@ -28,4 +28,16 @@
 
         return $rows;
     }
+
+    function cari($keyword) {
+        $conn = conn();
+        $cari = $conn->query("SELECT * FROM mahasiswa WHERE nama LIKE '%$keyword%' OR nim LIKE '%$keyword%'");
+
+        $rows = [];
+        while($row = $cari->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
 ?>
