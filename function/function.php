@@ -133,4 +133,39 @@
 
         return $conn->affected_rows;
     }
+
+    // Edit
+    function edit($data) {
+        $conn = conn();
+
+        $id = $data['id'];
+        $nama = htmlspecialchars($data['nama']);
+        $nim = htmlspecialchars($data['nim']);
+        $jurusan = htmlspecialchars($data['jurusan']);
+        $alamat = htmlspecialchars($data['alamat']);
+        $gambar_lama = htmlspecialchars($data['gambar_lama']);
+
+        // Hapus Gambar
+        $gambar = query("SELECT * FROM mahasiswa WHERE id = '$id'");
+        $lokasi_file = '../img/';
+
+        if($gambar['gambar'] != 'default.png') {
+            unlink($lokasi_file.$gambar['gambar']);
+        }
+
+        // Upload Gambar
+        $gambar = upload();
+
+        if(!$gambar) {
+            return false;
+        }
+
+        if($gambar == 'default.png') {
+            $gambar = $gambar_lama;
+        }
+
+        $conn->query("UPDATE mahasiswa SET nama = '$nama', nim = '$nim', jurusan = '$jurusan', alamat = '$alamat', gambar = '$gambar' WHERE id = '$id'");
+        
+        return $conn->affected_rows;
+    }
 ?>

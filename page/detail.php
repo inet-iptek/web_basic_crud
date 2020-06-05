@@ -1,9 +1,10 @@
 <?php 
     require '../function/function.php';
 
+    
     // ambil id dari url
-    $conn = conn();
     // untuk menghindari sql injection gunakan fungsi real_escape_string pada fungsi mysqli
+    $conn = conn();
     $id = $conn->real_escape_string($_GET['id']);
 
     $data = query("SELECT * FROM mahasiswa WHERE id = '$id'");
