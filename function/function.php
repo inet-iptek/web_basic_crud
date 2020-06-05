@@ -10,16 +10,19 @@
 
         return $conn;
     }
-
+    // Untuk menampikan 1 baris pada table
     function query($s) {
         $conn = conn();
 
         $data = $conn->query($s);
 
-        // Jika data nya hanya 1
-        if($data->num_rows == 1) {
-            return $data->fetch_assoc();
-        }
+        return $data->fetch_assoc();
+    }
+    // Untuk menampilkan banyak data
+    function queryAll($s) {
+        $conn = conn();
+
+        $data = $conn->query($s);
 
         $rows = [];
         while($row = $data->fetch_assoc()) {
@@ -136,6 +139,7 @@
 
     // Edit
     function edit($data) {
+        
         $conn = conn();
 
         $id = $data['id'];
@@ -143,30 +147,55 @@
         $nim = htmlspecialchars($data['nim']);
         $jurusan = htmlspecialchars($data['jurusan']);
         $alamat = htmlspecialchars($data['alamat']);
-        $gambar_lama = htmlspecialchars($data['gambar_lama']);
+        $gambar_lama = $data['gambar_lama'];
 
-        // Hapus Gambar
-        $gbr = query("SELECT * FROM mahasiswa WHERE id = '$id'");
-        $lokasi_file = '../img/';
-
-        if($gbr['gambar'] != 'default.png') {
-            unlink($lokasi_file.$gbr['gambar']);
-        }
-
-        // Upload Gambar
-        $gambar = upload();
-
-        if(!$gambar) {
-            return false;
-        }
-
-        if($gambar == 'default.png') {
-            $gambar = $gambar_lama;
-        }
-
-        $conn->query("UPDATE mahasiswa SET nama = '$nama', nim = '$nim', jurusan = '$jurusan', alamat = '$alamat', gambar = '$gambar' WHERE id = '$id'");
         
-        return $conn->affected_rows;
+        if(empty($_FILES['gambar']['name'])) {
+            $edit = $conn->query("UPDATE mahasiswa SET nama = '$nama', nim = '$nim', jurusan = '$jurusan', alamat = '$alamat' WHERE id = '$id'");
+            if($edit) {
+                echo "<script>
+                    alert('Berhasil');
+                    document.location.href = 'detail.php?id=".$id."';
+                </script>";
+            } else {
+                echo "<script>
+                    alert('Gagal');
+                    
+                </script>";
+            }
+        } else {
+            $gambar = upload();        
+
+            if(!$gambar) {
+                return false;
+            }
+    
+            if($gambar == 'default.png') {
+                $gambar = $gambar_lama;
+            }
+            
+            $gbr = query("SELECT * FROM mahasiswa WHERE id = '$id'");
+            $lokasi_file = '../img/';
+    
+            if($gbr['gambar'] != 'default.png') {
+                unlink($lokasi_file.$gbr['gambar']);
+            }
+
+            $edit = $conn->query("UPDATE mahasiswa SET nama = '$nama', nim = '$nim', jurusan = '$jurusan', alamat = '$alamat', gambar = '$gambar' WHERE id = '$id'");
+            if($edit) {
+                echo "<script>
+                    alert('Berhasil');
+                    document.location.href = 'detail.php?id=".$id."';
+                </script>";
+            } else {
+                echo "<script>
+                    alert('Gagal');
+                    
+                </script>";
+            }
+        }
+
+        
     }
 
     function register($data) {

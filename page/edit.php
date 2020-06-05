@@ -4,6 +4,7 @@
 
     // Cek Login
     session_start();
+    
     if(!isset($_SESSION['login'])) {
         header('location:../auth/login.php');
         exit;
@@ -26,16 +27,7 @@
 
     // Jika tombil edit ditekan
     if(isset($_POST['edit'])) {
-        if(edit($_POST) > 0) {
-            echo "<script>
-                alert('Berhasil');
-            </script>>";
-            header('location:detail.php?id='. $id);
-            exit;
-        } else {
-            echo "Gagal";
-        }
-        
+        edit($_POST);
     }
 ?>
 
@@ -48,6 +40,7 @@
 </head>
 <body>
     <h1>Edit Mahasiswa</h1>
+    
     <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $dt['id']; ?>">
         <table>

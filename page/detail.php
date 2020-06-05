@@ -26,6 +26,7 @@
 </head>
 <body>
     <h1>Detail Mahasiswa</h1>
+
     <img src="../img/<?= $data['gambar']; ?>" width="200">
     <table>
         <tr>

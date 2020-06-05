@@ -7,7 +7,7 @@
         exit;
     }
 
-    $data = query("SELECT * FROM mahasiswa");
+    $data = queryAll("SELECT * FROM mahasiswa");
 
     // jika tombol cari di klik
     if(isset($_POST['cari'])) {
