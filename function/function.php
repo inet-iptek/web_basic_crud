@@ -149,7 +149,7 @@
         $alamat = htmlspecialchars($data['alamat']);
         $gambar_lama = $data['gambar_lama'];
 
-        
+        // Jika tidak upload gambar
         if(empty($_FILES['gambar']['name'])) {
             $edit = $conn->query("UPDATE mahasiswa SET nama = '$nama', nim = '$nim', jurusan = '$jurusan', alamat = '$alamat' WHERE id = '$id'");
             if($edit) {

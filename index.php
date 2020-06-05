@@ -67,7 +67,7 @@
 
     </div>
 
-    <script src="js/script.js"></script>
+    <script src="js/ajax-search.js"></script>
 
 </body>
 </html>

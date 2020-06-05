@@ -77,8 +77,12 @@
                 <th>Gambar</th>
                 <td>:</td>
                 <td>
-                    <input type="file" name="gambar">
-                   
+                    <input type="file" name="gambar" class="gambar" onchange="previewImage()">  
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <img src="../img/<?= $dt['gambar']; ?>" width="120" style="display: block; margin: auto;" class="img-preview">
                 </td>
             </tr>
             <tr>
@@ -93,5 +97,7 @@
             </tr>
         </table>
     </form>
+
+    <script src="../js/preview-image.js"></script>
 </body>
 </html>
