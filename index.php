@@ -17,7 +17,7 @@
 </head>
 <body>
     <h1>Data Mahasiswa</h1>
-    <a href="">Tambah Data</a>
+    <a href="page/tambah.php">Tambah Data</a>
 
     <br><br>
 
@@ -51,7 +51,7 @@
                 <td><img src="img/<?= $dt['gambar']; ?>" width="100"></td>
                 <td><?= $dt['nama']; ?></td>
                 <td>
-                    <a href="detail">Detail</a>
+                    <a href="page/detail.php?id=<?= $dt['id']; ?>">Detail</a>
                 </td>
             </tr>
             <?php endforeach; ?>
