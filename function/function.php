@@ -52,11 +52,7 @@
 
         // Ketika gambar kosong / tidak dipilih
         if($error == 4) {
-            echo "<script>
-                alert('Gambar kosong');
-            </script>";
-
-            return false;
+           return 'default.png';
         }
 
         // Cek ekstensi file
@@ -120,6 +116,21 @@
 
         $conn->query("INSERT INTO mahasiswa(nama,nim,jurusan,alamat,gambar) VALUES('$nama','$nim','$jurusan','$alamat','$gambar')");
         
+        return $conn->affected_rows;
+    }
+
+    // Hapus
+    function hapus($id) {
+        $conn = conn();
+        $gambar = query("SELECT * FROM mahasiswa WHERE id = '$id'");
+        $lokasi_file = '../img/';
+
+        $conn->query("DELETE FROM mahasiswa WHERE id = '$id'");
+
+        if($gambar['gambar'] != 'default.png') {
+            unlink($lokasi_file.$gambar['gambar']);
+        }
+
         return $conn->affected_rows;
     }
 ?>

@@ -42,10 +42,10 @@
         </tr>
         <tr>
             <td>
-                <a href="">Edit</a>
+                <a href="edit.php?id=<?= $data['id']; ?>">Edit</a>
             </td>
             <td>
-                <a href="">Hapus</a>
+                <a onclick="return confirm('Yakin?')" href="hapus.php?id=<?= $data['id']; ?>">Hapus</a>
             </td>
         </tr>
         <tr>
