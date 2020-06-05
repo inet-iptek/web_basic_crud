@@ -168,4 +168,53 @@
         
         return $conn->affected_rows;
     }
+
+    function register($data) {
+        $conn = conn();
+
+        $username = htmlspecialchars($data['username']);
+        $password1 = $conn->real_escape_string($data['password1']);
+        $password2 = $conn->real_escape_string($data['password2']);
+
+        // Jika Username / Password kosong
+        if(empty($username) || empty($password1) || empty($password2)) {
+            echo "<script>
+                alert('Username / Password tidak boleh kosong')
+            </script>";
+            return false;
+        }
+
+        // Jika username sudah ada
+        if(query("SELECT * FROM login WHERE username = '$username'")) {
+            echo "<script>
+                alert('Username sudah terdaftar')
+            </script>";
+            return false;
+        }
+
+        // Jika konfirmasi password tidak sesuai
+        if($password1 !== $password2) {
+            echo "<script>
+                alert('Konfirmasi password tidak sama')
+            </script>";
+            return false;
+        }
+
+        // Jika password kurang dari 5 digit
+        if(strlen($password1) < 5) {
+            echo "<script>
+                alert('Password terlalu pendek')
+            </script>";
+            return false;
+        }
+
+        // Jika Username dan Password sudah sesuai
+
+        // Enkripsi Password
+        $password_baru = password_hash($password1, PASSWORD_DEFAULT);
+
+        $conn->query("INSERT into login(username, password) VALUES('$username', '$password_baru')");
+
+        return $conn->affected_rows;
+    }
 ?>

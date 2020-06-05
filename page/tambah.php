@@ -28,21 +28,21 @@
                 <th>Nama</th>
                 <td>:</td>
                 <td>
-                    <input type="text" name="nama" placeholder="Nama" required>
+                    <input type="text" name="nama" placeholder="Nama">
                 </td>
             </tr>
             <tr>
                 <th>NIM</th>
                 <td>:</td>
                 <td>
-                    <input type="text" name="nim" placeholder="NIM" required>
+                    <input type="text" name="nim" placeholder="NIM">
                 </td>
             </tr>
             <tr>
                 <th>Jurusan</th>
                 <td>:</td>
                 <td>
-                    <input type="text" name="jurusan" placeholder="Jurusan" required>
+                    <input type="text" name="jurusan" placeholder="Jurusan">
                 </td>
             </tr>
             <tr>
