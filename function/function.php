@@ -146,11 +146,11 @@
         $gambar_lama = htmlspecialchars($data['gambar_lama']);
 
         // Hapus Gambar
-        $gambar = query("SELECT * FROM mahasiswa WHERE id = '$id'");
+        $gbr = query("SELECT * FROM mahasiswa WHERE id = '$id'");
         $lokasi_file = '../img/';
 
-        if($gambar['gambar'] != 'default.png') {
-            unlink($lokasi_file.$gambar['gambar']);
+        if($gbr['gambar'] != 'default.png') {
+            unlink($lokasi_file.$gbr['gambar']);
         }
 
         // Upload Gambar
