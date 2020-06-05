@@ -1,5 +1,10 @@
 <?php 
     require '../function/function.php';
+
+    if(isset($_POST['login'])) {
+        login($_POST);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -17,14 +22,14 @@
                 <th>Username</th>
                 <td>:</td>
                 <td>
-                    <input type="text" name="username" placeholder="Username">
+                    <input type="text" name="username" placeholder="Username" required autofocus>
                 </td>
             </tr>
             <tr>
                 <th>Password</th>
                 <td>:</td>
                 <td>
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password" required>
                 </td>
             </tr>
             <tr>

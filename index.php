@@ -1,5 +1,12 @@
 <?php 
     require 'function/function.php';
+    // Cek Login
+    session_start();
+    if(!isset($_SESSION['login'])) {
+        header('location:auth/login.php');
+        exit;
+    }
+
     $data = query("SELECT * FROM mahasiswa");
 
     // jika tombol cari di klik
@@ -16,6 +23,7 @@
     <title>Web Basic Crud</title>
 </head>
 <body>
+    <a href="auth/logout.php">Logout</a>
     <h1>Data Mahasiswa</h1>
     <a href="page/tambah.php">Tambah Data</a>
 

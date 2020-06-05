@@ -2,6 +2,13 @@
 
     require '../function/function.php';
 
+    // Cek Login
+    session_start();
+    if(!isset($_SESSION['login'])) {
+        header('location:../auth/login.php');
+        exit;
+    }
+
     if(isset($_POST['tambah'])) {
         if(tambah($_POST) > 0) {
             echo "Berhasil";

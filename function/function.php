@@ -217,4 +217,34 @@
 
         return $conn->affected_rows;
     }
+
+    // Login
+    function login($data) {
+        session_start();
+        $username = htmlspecialchars($data['username']);
+        $password = htmlspecialchars($data['password']);
+        
+        // Cek Username
+        $user = query("SELECT * FROM login WHERE username = '$username'");
+
+        if($user) {
+            // Cek Password
+            if(password_verify($password, $user['password'])) {
+                // Set Session
+                $_SESSION['login'] = TRUE;
+                header('location:../');
+                exit;
+            } else {
+                echo "<script>
+                alert('Password Salah');
+                </script>";
+            }
+        } else {
+            echo "<script>
+                alert('Username tidak terdaftar');
+            </script>";
+        }
+        
+    }
+
 ?>

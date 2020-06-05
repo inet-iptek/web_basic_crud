@@ -1,6 +1,13 @@
 <?php 
     require '../function/function.php';
 
+    // Cek Login
+    session_start();
+    if(!isset($_SESSION['login'])) {
+        header('location:../auth/login.php');
+        exit;
+    }
+
     
     // ambil id dari url
     // untuk menghindari sql injection gunakan fungsi real_escape_string pada fungsi mysqli

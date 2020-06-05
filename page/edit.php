@@ -2,6 +2,13 @@
 
     require '../function/function.php';
 
+    // Cek Login
+    session_start();
+    if(!isset($_SESSION['login'])) {
+        header('location:../auth/login.php');
+        exit;
+    }
+
     
     // Jika tidak ada id di url
     if(!isset($_GET['id'])) {
