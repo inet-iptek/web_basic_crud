@@ -4,7 +4,7 @@
     $data = cari($_GET['keyword']);
 ?>
 
-<table border="1" cellpadding="10" cellspacing="0">
+        <table border="1" cellpadding="10" cellspacing="0">
             <tr>
                 <th>#</th>
                 <th>Gambar</th>
